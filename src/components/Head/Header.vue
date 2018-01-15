@@ -1,10 +1,16 @@
 <template>
   <div class="head">
     <div class="iocn"></div>
-    <div class="header-title"></div>
+    <div class="header-title">{{HeadTitle}}</div>
     <div class="cart-iocn"></div>
   </div>
 </template>
+
+<script>
+export default {
+  props:['HeadTitle'],
+}
+</script>
 
 <style lang="less" scoped>
 .head{

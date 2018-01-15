@@ -6,7 +6,7 @@ import router from './router'
 //引入设置rem文件
 import '@/styles/reset.js'
 //引入样式文件
-import '@/styles/index.less'
+import './styles/index.less'
 
 Vue.config.productionTip = false
 
