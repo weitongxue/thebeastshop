@@ -45,6 +45,66 @@
             <div class="date">{{date}}</div>
           </div>
         </div>
+        <!-- 商品区 -->
+        <div class="daily-item" v-if="item.id <8" v-for="(item,index) in categories[0].categorie" :key="index">
+          <img :src="item.img">
+          <div class="title">
+            <div class="tag">{{item.name}}</div>
+            <div class="text">{{item.title}}</div>
+          </div>
+          <div class="desc">{{item.text}}</div>
+        </div>
+      </div>
+      <!-- 推荐商品 -->
+      <div class="products">
+        <div class="products-title">
+          DEITOR'S  PICKS
+          <div class="hint">编辑推荐</div>
+        </div>
+        <div class="products-wrap">
+          <div class="list-wrap">
+            <div class="list-product">
+              <div class="product-img">
+                <img src="http://dummyimage.com/292x304/799bf2" alt="">
+              </div>
+              <div class="line bold">_</div>
+              <div class="brand-name bold">niha</div>
+              <div class="name bold">你好</div>
+              <div class="price">￥13</div>
+            </div>
+            <div class="list-product">
+              <div class="product-img">
+                <img src="http://dummyimage.com/292x304/799bf2" alt="">
+              </div>
+              <div class="line bold">_</div>
+              <div class="brand-name bold">niha</div>
+              <div class="name bold">你好</div>
+              <div class="price">￥13</div>
+            </div>
+            <div class="list-product">
+              <div class="product-img">
+                <img src="http://dummyimage.com/292x304/799bf2" alt="">
+              </div>
+              <div class="line bold">_</div>
+              <div class="brand-name bold">niha</div>
+              <div class="name bold">你好</div>
+              <div class="price">￥13</div>
+            </div>
+            <div class="list-product">
+              <div class="product-img">
+                <img src="http://dummyimage.com/292x304/799bf2" alt="">
+              </div>
+              <div class="line bold">_</div>
+              <div class="brand-name bold">niha</div>
+              <div class="name bold">你好</div>
+              <div class="price">￥13</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- footer -->
+      <div class="footer">
+        <img src="./images/footer-iocn.png" alt="">
       </div>
     </div>
   </div>
@@ -84,12 +144,17 @@ export default {
       year:'',
       mouth:'',
       date:'',
-      mouths:['January','February','March','April','May','June','July','August','September','October','November','December']
+      mouths:['January','February','March','April','May','June','July','August','September','October','November','December'],
     }
   },
   components:{
     Header
-  }, 
+  },
+  computed:{
+    categories(){
+      return this.$store.state.categories
+    }
+  }
 }
 </script>
 
@@ -100,6 +165,8 @@ nav{
   border-bottom: 1px solid #e6e7e8;
   position: fixed;
   width: 100%;
+  z-index: 100;
+  background-color: #fff;
   ul{
     display: flex;
     flex-wrap: nowrap;
@@ -168,7 +235,7 @@ nav{
       float: left;
       padding: .1067rem 0;
       font-size: .5867rem;
-      font-weight: 500;
+      font-weight: 600;
       font-family: beastBold;
     }
     .time{
@@ -192,6 +259,112 @@ nav{
         color:@color-text;
       }
     }
+  }
+}
+//商品区
+.daily-item {
+  padding-bottom: 1.3333rem;
+  img {
+    width:100%;
+    height:5.6rem;
+  }
+  .title {
+    margin: 0.8rem 0 0.37333rem;
+    border-left: 0.053333rem solid #d8d8d8;
+    padding-left: 0.32rem;
+    .tag {
+      font-size: 0.20333rem;
+      color:#004c46;
+    }
+    .text{
+      font-size: 0.44333rem;
+    }
+  }
+  .desc {
+    font-size: .1966rem;
+    padding: 0 .1333rem 0 .373333rem;
+  }
+}
+//商品推荐
+.products{
+  border-top: .08rem solid #d8d8d8;
+  width: 8.6667rem;
+  margin:0 auto;
+  .products-title{
+    width: 5.3333rem;
+    padding: .48rem 0;
+    font-size: .5867rem;
+    position: relative;
+    font-family: beastBold;
+    font-weight: 600;
+    color:#2b2b2b;
+    .hint{
+      font-size: .4rem;
+      position: absolute;
+      top: 40%;
+      left: 100%;
+      border-left: .0534rem solid #000;
+      margin-left: .21334rem;
+      padding-left: .21333rem;
+      line-height: .4rem;
+      width: 1.8667rem;
+    }
+  }
+  .list-wrap{
+    overflow: hidden;
+    .list-product:nth-child(2n+1){
+       float: left;
+    }
+    .list-product:nth-child(2n){
+       float: right;
+    }
+    .list-product{
+      font-size: .34667rem;
+      width: 3.76rem;
+      height: 6.4533rem;
+      margin-bottom: .74667rem;
+      .products-img{
+        width: 100%;
+      }
+      .line{
+        margin:.13334rem 0;
+        font-weight: 700;
+        font-size: .37334rem;
+      }
+      .bold{
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+      .brand-name{
+        font-weight: 400;
+        line-height: .45334rem;
+        font-size: .37334rem;
+        height: .45334rem;
+      }
+      .name{
+        font-size: .4rem;
+        height: .45334rem;
+        line-height: .45334rem;
+      }
+      .price{
+        padding-top: .16rem;
+        text-align: center;
+        color:@color-minText;
+        font-size: .4rem;
+      }
+    }
+  }
+}
+.footer{
+  padding: .32rem 0 .8rem;
+  img{
+    width: 1.2rem;
+    height: .37333rem;
+    display: block;
+    margin:0 auto;
   }
 }
 </style>

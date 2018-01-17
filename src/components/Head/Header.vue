@@ -22,29 +22,17 @@
         <div class="menu-list">
           <div class="menu-group">
             <!-- 列表一 -->
-            <router-link tag="div" to="/" class="menu-item">
+            <div class="menu-item" @click="upHome">
               <h2>首页</h2>
-            </router-link>
+            </div>
           </div>
           <!-- 列表二 -->
           <div class="menu-group">
-            <div class="menu-item" @click="listBol = !listBol">
-              <h2>野兽家具廊<i :class="{'active' :listBol}"></i></h2>
-              <ul class="menu-item-child" v-show="listBol">
-                <li class="menu-child-item">家纺</li>
-                <li class="menu-child-item">家饰</li>
-                <li class="menu-child-item">餐厨</li>
-                <li class="menu-child-item">进入店铺</li>
+            <div class="menu-item" @click="changeBol(item.id)" v-if="item.id >1 && item.id < 6" v-for="(item,index) in categories" :key="index">
+              <h2>{{item.name}}<i :class="{'active' :item.Bol}"></i></h2>
+              <ul class="menu-item-child" v-show="item.Bol">
+                <li class="menu-child-item" v-for="x in item.categorie" :key="x.id">{{x.name}}</li>
               </ul>
-            </div>
-            <div class="menu-item">
-              <h2>野兽派花店<i></i></h2>
-            </div>
-            <div class="menu-item">
-              <h2>野兽小姐<i></i></h2>
-            </div>
-            <div class="menu-item">
-              <h2>贵妇美容室<i></i></h2>
             </div>
           </div>
           <!-- 列表三 -->
@@ -87,7 +75,27 @@ export default {
       //大分类的显示隐藏
       ListBol:false,
       //小分类的显示隐藏
-      listBol:false
+      listBol:false,
+    }
+  },
+  computed:{
+    categories(){
+      return this.$store.state.categories
+    }
+  },
+  methods:{
+    //跳转到首页
+    upHome(){
+      this.$router.push('/')
+      this.ListBol = false
+    },
+    //下拉选项
+    changeBol(id){
+      for(let i = 0 ; i < this.categories.length ; i++){
+        if(id === this.categories[i].id){
+          this.categories[i].Bol = !this.categories[i].Bol
+        }
+      }
     }
   }
 }
@@ -96,7 +104,7 @@ export default {
 <style lang="less" scoped>
 @import url('../../styles/var.less');
 .head{
-  z-index: 1;
+  z-index: 1000;
   position:fixed;
   top:0;
   left: 0;
@@ -115,7 +123,6 @@ export default {
   top: .4rem;
   left: .4rem;
   z-index: 10000;
-  zoom:1;
 }
 .header-iocn{
   width: .5867rem;
@@ -130,6 +137,8 @@ export default {
   top: 0;
   bottom: 0;
   background-color:#3c3c3c;
+  z-index: 10000;
+  overflow-y:scroll;
   .menu-member{
     overflow: hidden;
     padding: .9333rem 0 .9333rem .8rem;
