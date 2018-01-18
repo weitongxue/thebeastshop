@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <Header HeadTitle ='野兽派'/>
+    <Header HeadTitle ='野兽派' HeadBol ='false'/>
     <div class="main-wrap">
       <!-- 导航 -->
       <nav>
         <ul>
-          <router-link tag="li" to="/new_product">新鲜上架</router-link>
+          <router-link tag="li" to="/new_product/6/0">新鲜上架</router-link>
           <router-link tag="li" to="/featured">本周主打</router-link>
           <router-link tag="li" to="/mine">我的账号</router-link>
         </ul>
@@ -63,41 +63,14 @@
         </div>
         <div class="products-wrap">
           <div class="list-wrap">
-            <div class="list-product">
+            <div class="list-product" v-for="(item,index) in recommend" :key="index">
               <div class="product-img">
-                <img src="http://dummyimage.com/292x304/799bf2" alt="">
+                <img :src="item.img">
               </div>
               <div class="line bold">_</div>
-              <div class="brand-name bold">niha</div>
-              <div class="name bold">你好</div>
-              <div class="price">￥13</div>
-            </div>
-            <div class="list-product">
-              <div class="product-img">
-                <img src="http://dummyimage.com/292x304/799bf2" alt="">
-              </div>
-              <div class="line bold">_</div>
-              <div class="brand-name bold">niha</div>
-              <div class="name bold">你好</div>
-              <div class="price">￥13</div>
-            </div>
-            <div class="list-product">
-              <div class="product-img">
-                <img src="http://dummyimage.com/292x304/799bf2" alt="">
-              </div>
-              <div class="line bold">_</div>
-              <div class="brand-name bold">niha</div>
-              <div class="name bold">你好</div>
-              <div class="price">￥13</div>
-            </div>
-            <div class="list-product">
-              <div class="product-img">
-                <img src="http://dummyimage.com/292x304/799bf2" alt="">
-              </div>
-              <div class="line bold">_</div>
-              <div class="brand-name bold">niha</div>
-              <div class="name bold">你好</div>
-              <div class="price">￥13</div>
+              <div class="brand-name bold">{{item.name}}</div>
+              <div class="name bold">{{item.names}}</div>
+              <div class="price">￥{{item.price}}</div>
             </div>
           </div>
         </div>
@@ -153,6 +126,10 @@ export default {
   computed:{
     categories(){
       return this.$store.state.categories
+    },
+    //获取推荐商品
+    recommend(){
+      return this.$store.state.recommend
     }
   }
 }
@@ -323,8 +300,15 @@ nav{
       width: 3.76rem;
       height: 6.4533rem;
       margin-bottom: .74667rem;
-      .products-img{
+      .product-img{
         width: 100%;
+        height: 4.0533rem;
+        background:url('./images/p.png') 0 0 no-repeat;
+        background-size: 100%;
+        img{
+          width: 3.8933rem;
+          height: 4.0533rem;
+        }
       }
       .line{
         margin:.13334rem 0;

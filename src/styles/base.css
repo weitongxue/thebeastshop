@@ -7,3 +7,8 @@
   background-color: white;
   overflow-y: scroll;
 }
+.no-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}

@@ -31,16 +31,16 @@
             <div class="menu-item" @click="changeBol(item.id)" v-if="item.id >1 && item.id < 6" v-for="(item,index) in categories" :key="index">
               <h2>{{item.name}}<i :class="{'active' :item.Bol}"></i></h2>
               <ul class="menu-item-child" v-show="item.Bol">
-                <li class="menu-child-item" v-for="x in item.categorie" :key="x.id">{{x.name}}</li>
+                <li class="menu-child-item" @click="toProduct(item.id,x.id)" v-for="x in item.categorie" :key="x.id">{{x.name}}</li>
               </ul>
             </div>
           </div>
           <!-- 列表三 -->
           <div class="menu-group">
-            <div class="menu-item">
+            <div @click="topro" class="menu-item">
               <h2>新鲜上架</h2>
             </div>
-            <div class="menu-item">
+            <div @click="toArticle" class="menu-item">
               <h2>海外直邮</h2>
             </div>
             <div class="menu-item">
@@ -57,7 +57,7 @@
     <div class="header-title">{{HeadTitle}}</div>
     <!-- 右边图标 -->
     <div class="header-right">
-      <div class="search-iocn">
+      <div class="search-iocn" v-if="HeadBol">
         <span></span>
       </div>
       <div class="cart-iocn">
@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  props:['HeadTitle'],
+  props:['HeadTitle','HeadBol'],
   data(){
     return {
       //大分类的显示隐藏
@@ -87,6 +87,20 @@ export default {
     //跳转到首页
     upHome(){
       this.$router.push('/')
+      this.ListBol = false
+    },
+    //跳转页面
+    toProduct(ID,id){
+      //ID，id是两个变量，所以在路由里要拼接
+      this.$router.push(`/new_product/${ID}/${id}`)
+      this.ListBol = false
+    },
+    topro(){
+      this.$router.push(`/new_product/6/0`)
+      this.ListBol = false
+    },
+    toArticle(){
+      this.$router.push('/article')
       this.ListBol = false
     },
     //下拉选项

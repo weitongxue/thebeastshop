@@ -58,7 +58,111 @@ var data = Mock.mock({
         },
         {
           "id":8,
-          "name":"编辑推荐"
+          "name":"编辑推荐",
+          "recommend":[
+            {
+              "id":1001,
+              "name":"CALATAS",
+              "names":"护色洗发水-黑色 250ml",
+              "price":214.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/image/20171229141015791844.jpg@4e_0o_0l_345h_330w_90q.jpg%7Cwatermark=1&object=aW1hZ2UvV00xNDc0NTM1NDUyODYyMC45NjExNTc0MTM1NzI2MzkzMzcwX3NtYWxsLmpwZ0AzNVA=&t=90&p=1&x=10&y=10&voffset=0",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+            {
+              "id":1002,
+              "name":"THE LAUNDRESS",
+              "names":"羊毛羊绒洗护系列限量套组",
+              "price":520.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/image/20171220171956479919.jpg@4e_0o_0l_345h_330w_90q.jpg",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+            {
+              "id":1003,
+              "name":"elvis",
+              "names":"玫瑰保湿护唇膏 4.25g",
+              "price":128.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/image/20171227172556901294.jpg@4e_0o_0l_345h_330w_90q.jpg%7Cwatermark=1&object=aW1hZ2UvV00xNDc0NTM1NDUyODYyMC45NjExNTc0MTM1NzI2MzkzMzcwX3NtYWxsLmpwZ0AzNVA=&t=90&p=1&x=10&y=10&voffset=0",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+            {
+              "id":1004,
+              "name":"A.R.彭克",
+              "names":"A.R.Penck",
+              "price":150.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/image/20171228161153475017.jpg@4e_0o_0l_345h_330w_90q.jpg",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+            {
+              "id":1005,
+              "name":"pulpo",
+              "names":"小鹿摆件",
+              "price":1480.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/image/20180111141827343557.jpg@4e_0o_0l_345h_330w_90q.jpg",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+            {
+              "id":1006,
+              "name":"Carriere Freres",
+              "names":"檀香香氛蜡烛",
+              "price":390.00,
+               //推荐理由
+              "reason":"@cparagraph()",
+              //品牌故事
+              "story":"@cparagraph()",
+              "img":"https://img.thebeastshop.com/imagePro/PROD001016692/PROD001016692_1_1476330571859.jpg@4e_0o_0l_345h_330w_90q.jpg",
+               //大图
+              "imgs":"@image(375x391,@color)",
+                //材质
+              "texture":"@cword(4,6)",
+              //尺寸
+              "size|10-99":10,
+            },
+          ]
         },
       ]
     },
@@ -185,7 +289,34 @@ var data = Mock.mock({
     },
     {
       "id":7,
-      "name":"海外直邮"
+      "img":"https://img.thebeastshop.com/apppictures/2017-10-12/9dbe3e4e063f42573c14bb436b699ba5.png@0o_0l_750w_90q.png",
+      "name":"海外直邮",
+      "categorie":[
+        {
+          "id":1,
+          "name":"个人洗护",
+          "img":"https://img.thebeastshop.com/apppictures/2017-09-22/b6d1ec6361a4a4c1c5608b072f82c5bd.jpg@0o_0l_750w_90q.jpg"
+        },
+        {
+          "id":2,
+          "name":"个人护理"
+        },
+        {
+          "id":3,
+          "name":"面部护理",
+          "img":"https://img.thebeastshop.com/apppictures/2017-09-22/d2fb38ea9ad927293a7d97933e4578f9.jpg@0o_0l_750w_90q.jpg"
+        },
+        {
+          "id":4,
+          "name":"口服美容",
+          "img":"https://img.thebeastshop.com/apppictures/2017-09-04/f07569c846b66b521dcfd594f2f22453.jpg@0o_0l_750w_90q.jpg"
+        },
+        {
+          "id":5,
+          "name":"母婴用品",
+          "img":"https://img.thebeastshop.com/apppictures/2017-09-04/a777993c119c4e607c6835f556f3c23f.jpg@0o_0l_750w_90q.jpg"
+        },
+      ]
     },
     {
       "id":8,
@@ -197,7 +328,7 @@ var data = Mock.mock({
     },
   ],
   //商品信息
-  "products|1000":[
+  "products|1500":[
     {
       "id|+1":1,
       //大分类id
@@ -211,6 +342,8 @@ var data = Mock.mock({
       "price|99-9999.2":10,
       //材质
       "texture":"@cword(4,6)",
+      //描述
+      "describe":"@cword(6,10)",
       //尺寸
       "size|10-99":10,
       //产地
