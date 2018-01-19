@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Header HeadTitle ='野兽派' HeadBol ='false'/>
+    <Header HeadTitle ='野兽派' HeadBol ='true' />
     <div class="main-wrap">
       <!-- 导航 -->
       <nav>

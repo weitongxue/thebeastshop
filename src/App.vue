@@ -2,10 +2,10 @@
   <div id="app">
     <keep-alive>
       <!-- 缓存页面 -->
-       <router-view v-if="$route.meta.KeepAlive"></router-view>
+       <router-view v-if="!$route.meta.KeepAlive"></router-view>
     </keep-alive>
     <!-- 不缓存 -->
-    <router-view v-if="!$route.meta.KeepAlive"></router-view>
+    <router-view v-if="$route.meta.KeepAlive"></router-view>
   </div>
 </template>
 

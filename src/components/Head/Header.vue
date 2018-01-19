@@ -40,7 +40,7 @@
             <div @click="topro" class="menu-item">
               <h2>新鲜上架</h2>
             </div>
-            <div @click="toArticle" class="menu-item">
+            <div @click="toArticle(7,0)" class="menu-item">
               <h2>海外直邮</h2>
             </div>
             <div class="menu-item">
@@ -57,7 +57,7 @@
     <div class="header-title">{{HeadTitle}}</div>
     <!-- 右边图标 -->
     <div class="header-right">
-      <div class="search-iocn" v-if="HeadBol">
+      <div class="search-iocn" v-if="HeadBol == 'true'">
         <span></span>
       </div>
       <div class="cart-iocn">
@@ -99,8 +99,8 @@ export default {
       this.$router.push(`/new_product/6/0`)
       this.ListBol = false
     },
-    toArticle(){
-      this.$router.push('/article')
+    toArticle(ID,id){
+      this.$router.push( `/article/${ID}/${id}`)
       this.ListBol = false
     },
     //下拉选项

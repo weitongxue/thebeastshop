@@ -15,27 +15,43 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: HomePage
+      component: HomePage,
+      meta:{
+        //不缓存页面
+        KeepAlive : false
+      }
     },
     {
       path:'/new_product/:ID/:id',
       component:NewProduct,
       meta:{
-        //缓存页面
-        KeepAlive : true
+        //不缓存页面
+        KeepAlive : false
       }
     },
     {
       path:'/featured',
-      component:Featured
+      component:Featured,
+      meta:{
+        //不缓存页面
+        KeepAlive : false
+      }
     },
     {
       path:'/mine',
-      component:Mine
+      component:Mine,
+      meta:{
+        //不缓存页面
+        KeepAlive : false
+      }
     },
     {
-      path:'/article',
-      component:Article
+      path:'/article/:ID/:id',
+      component:Article,
+      meta:{
+        //不缓存页面
+        KeepAlive : false
+      }
     }
   ]
 })

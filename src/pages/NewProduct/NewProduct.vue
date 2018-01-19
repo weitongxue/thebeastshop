@@ -1,6 +1,6 @@
 <template>
   <div class="new-product">
-    <Header :HeadTitle ='title' HeadBol = 'false'/>
+    <Header :HeadTitle ='title' HeadBol = 'true'/>
     <div class="main-wrap">
       <!-- 导航 -->
       <nav>
@@ -19,7 +19,7 @@
       </nav>
       <!-- 商品 -->
       <div class="product-wrap">
-        <div class="product-item" v-for="(item,index) in showProductArr" :key="index">
+        <div class="product-item" v-for="(item,index) in sortProduct" :key="index">
           <div class="product-img">
             <img :src="item.img">
           </div>
@@ -35,12 +35,24 @@
 
 <script>
 import Header from '../../components/Head/Header'
+import api from '../../api'
 export default {
-  activated(){
-    this.getPath()
+  created(){
+    if(!this.products.length > 0){
+      this.$http(api.host + '/products')
+      .then(res =>{
+        this.productInfo = res.data
+        this.getPath()
+      })
+    }else{
+      this.productInfo = this.products
+      this.getPath()
+    } 
   },
   data(){
     return {
+      //商品数据(媒介)
+      productInfo:[],
       //判断是上还是下(默认是上)
       direction:true,
       myClass:'',
@@ -61,6 +73,8 @@ export default {
   },
   methods:{
     getPath(){
+      this.myClass = 'active2'
+      this.myStyle = ''
       this.title = ''
       this.showProductArr = []
       let path = this.$route.params;    //获得当前路径
@@ -69,16 +83,16 @@ export default {
       //同时在页面变化时拿到对应的商品数据
       if(this.id == 0){
         //表示没有小分类，这个时候应该拿到的就是大分类对应的商品数据
-        for(let i = 0 ; i < this.products.length ; i++){
-          if(this.ID == this.products[i].categoriesId){
-            this.showProductArr.push(this.products[i])
+        for(let i = 0 ; i < this.productInfo.length ; i++){
+          if(this.ID == this.productInfo[i].categoriesId){
+            this.showProductArr.push(this.productInfo[i])
           }
         }
       }else{
         //表示有小分类，这个时候应该拿到该大分类对应小分类的商品数据
-        for(let j = 0 ; j < this.products.length ; j++){
-          if(this.ID == this.products[j].categoriesId && this.id == this.products[j].categorieId){
-            this.showProductArr.push(this.products[j])
+        for(let j = 0 ; j < this.productInfo.length ; j++){
+          if(this.ID == this.productInfo[j].categoriesId && this.id == this.productInfo[j].categorieId){
+            this.showProductArr.push(this.productInfo[j])
           }
         }
       }
@@ -102,15 +116,17 @@ export default {
         }
       }
     },
-    //切换按钮的class值
+    //切换按钮的class值,并实现对应的商品数据排序
     changeClass(){
       this.myStyle = ''
       if(this.direction){
         this.direction = false
         this.myClass = 'active1'
+        //表示商品上架时间为升序
       }else{
         this.direction = true
         this.myClass = 'active2'
+        //表示商品上架时间为降序
       }
     },
     changeStyle(){
@@ -136,11 +152,33 @@ export default {
     products(){
       return this.$store.state.products
     },
-    //页面渲染的商品
-    showProduct(){
-      
+    //排序的商品
+    sortProduct(){
+      if(this.myClass == ''){
+        //排序的是商品价格
+        if(this.direction){
+          return this.showProductArr.slice(0).sort((a,b)=>{
+            return b.price - a.price
+        })
+        }else{
+          return this.showProductArr.slice(0).sort((a,b)=>{
+            return a.price - b.price
+          })
+        }
+      }else if (this.myStyle == ''){
+        //排序的是商品的上架时间
+        if(this.direction){
+          return this.showProductArr.slice(0).sort((a,b)=>{
+            return b.time - a.time
+        })
+        }else{
+          return this.showProductArr.slice(0).sort((a,b)=>{
+            return a.time - b.time
+          })
+        }
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -174,18 +212,18 @@ nav{
       .iocn1{
         background:url('./images/item-iocn3.png') 0 0 no-repeat;
       }
-      .active1{
-        background:url('./images/item-iocn4.png') 0 0 no-repeat;
-      }
-      .active2{
-        background:url('./images/item-iocn.png') 0 0 no-repeat;
-      }
       .iocn2{
         background:url('./images/item-iocn3.png') 0 0 no-repeat;
       }
       .iocn3{
         background:url('./images/item-iocn2.png') 0 0 no-repeat;
         background-size: 100% 100%;
+      }
+      .active1{
+        background: url('./images/item-iocn4.png') 0 0 no-repeat;
+      }
+      .active2{
+        background: url('./images/item-iocn.png') 0 0 no-repeat;
       }
     }
   }
