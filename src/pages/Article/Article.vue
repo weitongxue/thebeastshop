@@ -1,7 +1,7 @@
 <template>
   <div class="article">
     <Header HeadTitle = '大家好才是真的好' HeadBol='false'/>
-    <div class="main-wrap" ref="main">
+    <div class="main-wrap">
       <div class="outer-box">
         <div class="box-img">
           <img src="https://img.thebeastshop.com/apppictures/2017-10-12/9dbe3e4e063f42573c14bb436b699ba5.png@0o_0l_750w_90q.png">
@@ -97,8 +97,9 @@ import Header from '../../components/Head/Header'
 import api from '../../api'
 export default {
   mounted () {
-    let main = this.$refs['main']
-    main.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll',function(main){
+      
+    })
   },
   // mounted(){
   //   //获取到要操作的对象
@@ -221,15 +222,6 @@ export default {
       }
       return arr
     },
-    //滚动条
-    handleScroll() {
-      this.scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      console.log(this.scroll)
-    },
-  },
-  //离开页面时清除绑定事件
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
   },
 }
 </script>

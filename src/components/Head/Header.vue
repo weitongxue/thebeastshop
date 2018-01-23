@@ -131,6 +131,7 @@ export default {
   font-size:.4533rem;
   border-bottom:1px solid #e1e1e1;
   box-sizing: border-box;
+  background-color: white;
 }
 .header-left{
   position: fixed;

@@ -138,6 +138,7 @@ export default {
 <style lang="less" scoped>
 @import url('../../styles/base.css');
 @import url('../../styles/var.less');
+
 nav{
   border-bottom: 1px solid #e6e7e8;
   position: fixed;
