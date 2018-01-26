@@ -7,6 +7,7 @@ const NewProduct = resolve => require(['../pages/NewProduct/NewProduct.vue'], re
 const Featured = resolve => require(['../pages/Featured/Featured.vue'], resolve)
 const Mine = resolve => require(['../pages/Mine/Mine.vue'], resolve)
 const Article = resolve => require(['../pages/Article/Article.vue'], resolve)
+const Detail = resolve => require(['../pages/Detail/Detail.vue'], resolve)
 
 
 Vue.use(Router)
@@ -52,6 +53,10 @@ export default new Router({
         //不缓存页面
         KeepAlive : false
       }
+    },
+    {
+      path:"/detail",
+      component:Detail
     }
   ]
 })
