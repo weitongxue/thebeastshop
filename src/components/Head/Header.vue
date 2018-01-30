@@ -32,6 +32,7 @@
               <h2>{{item.name}}<i :class="{'active' :item.Bol}"></i></h2>
               <ul class="menu-item-child" v-show="item.Bol">
                 <li class="menu-child-item" @click="toProduct(item.id,x.id)" v-for="x in item.categorie" :key="x.id">{{x.name}}</li>
+                <li class="menu-child-item">进入店铺</li>
               </ul>
             </div>
           </div>
@@ -60,7 +61,10 @@
       <div class="search-iocn" v-if="HeadBol == 'true'">
         <span></span>
       </div>
-      <div class="cart-iocn">
+      <div class="cart-iocn" v-if="CartBol == 'true'">
+        <span></span>
+      </div>
+      <div class="favor-iocn" v-if=" FavorBol == 'true'">
         <span></span>
       </div>
     </div>
@@ -69,7 +73,7 @@
 
 <script>
 export default {
-  props:['HeadTitle','HeadBol'],
+  props:['HeadTitle','HeadBol','CartBol','FavorBol'],
   data(){
     return {
       //大分类的显示隐藏
@@ -232,7 +236,23 @@ export default {
       background-size: 100%;
     }
   }
+  .favor-iocn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: .3467rem;
+    width: .5867rem;
+    height: .5867rem;
+    span{
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: url('./images/favor.png') center center no-repeat;
+      background-size: 100%;
+    }
+  }
 }
+
 .menu-list{
   letter-spacing: .04rem;
   border-top: 1px solid #4f4f4f;

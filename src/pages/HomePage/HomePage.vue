@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <Header HeadTitle ='野兽派' HeadBol ='true' />
+    <Header HeadTitle ='野兽派' HeadBol ='true' CartBol = 'true'/>
     <div class="main-wrap">
       <!-- 导航 -->
       <nav>
         <ul>
           <router-link tag="li" to="/new_product/6/0">新鲜上架</router-link>
-          <router-link tag="li" to="/featured">本周主打</router-link>
+          <router-link tag="li" to="/new_product/5/0">本周主打</router-link>
           <router-link tag="li" to="/mine">我的账号</router-link>
         </ul>
       </nav>
@@ -251,15 +251,15 @@ nav{
     border-left: 0.053333rem solid #d8d8d8;
     padding-left: 0.32rem;
     .tag {
-      font-size: 0.20333rem;
+      font-size: .37334rem;
       color:#004c46;
     }
     .text{
-      font-size: 0.44333rem;
+      font-size: 0.53334rem;
     }
   }
   .desc {
-    font-size: .1966rem;
+    font-size: .3467rem;
     padding: 0 .1333rem 0 .373333rem;
   }
 }

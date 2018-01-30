@@ -1,20 +1,20 @@
 <template>
   <div class="article">
-    <Header HeadTitle = '大家好才是真的好' HeadBol='false'/>
+    <Header HeadTitle = '海外直邮精选好物' HeadBol='false' CartBol='true'/>
     <div class="main-wrap">
       <div class="outer-box">
         <div class="box-img">
           <img src="https://img.thebeastshop.com/apppictures/2017-10-12/9dbe3e4e063f42573c14bb436b699ba5.png@0o_0l_750w_90q.png">
         </div>
       </div>
-      <div class="nav-wrap">
-        <div class="nav-box" ref="move">
-          <div class="nav-item" v-for="(m,index) in categorie" :key="index">{{m.name}}</div>
+      <div class="nav-wrap" ref="move" :class="{'active':searchBarFixed}">
+        <div class="nav-box">
+          <div class="nav-item" v-for="item in categorie" :key="item.id">{{item.name}}</div>
         </div>
       </div>
       <!-- 个人护理大图 -->
-      <div class="outer-box">
-        <div class="img-box">
+      <div class="outer-box" ref="nurse">
+        <div class="img-box img-box1" >
           <img src="https://img.thebeastshop.com/apppictures/2017-09-22/b6d1ec6361a4a4c1c5608b072f82c5bd.jpg@0o_0l_750w_90q.jpg">
         </div>
       </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <!-- 面部护理大图 -->
-      <div class="outer-box">
+      <div class="outer-box" ref="face">
         <div class="img-box">
           <img src="https://img.thebeastshop.com/apppictures/2017-09-22/d2fb38ea9ad927293a7d97933e4578f9.jpg@0o_0l_750w_90q.jpg">
         </div>
@@ -49,7 +49,7 @@
         </div>
       </div>
       <!-- 口服美容护理大图 -->
-      <div class="outer-box">
+      <div class="outer-box" ref="hairdressing">
         <div class="img-box">
           <img src="https://img.thebeastshop.com/apppictures/2017-09-04/f07569c846b66b521dcfd594f2f22453.jpg@0o_0l_750w_90q.jpg">
         </div>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- 母婴大图 -->
-      <div class="outer-box">
+      <div class="outer-box" ref="baby">
         <div class="img-box">
           <img src="https://img.thebeastshop.com/apppictures/2017-09-04/a777993c119c4e607c6835f556f3c23f.jpg@0o_0l_750w_90q.jpg">
         </div>
@@ -95,28 +95,12 @@
 <script>
 import Header from '../../components/Head/Header'
 import api from '../../api'
+
 export default {
   mounted () {
-    window.addEventListener('scroll',function(main){
-      
-    })
+    //监听窗口的滚动事件
+    window.addEventListener('scroll',this.handleScroll)
   },
-  // mounted(){
-  //   //获取到要操作的对象
-  //   let move = this.$refs['move']
-  //   //阻止默认行为
-  //   touth.on('move','touchstart',function(e){
-  //     e.preventDefault()
-  //   })
-  //   //添加滑动事件(左滑动)
-  //   touth.on('move','swipeleft',function(e){
-  //     this.style.transform= "translate(-' + this.offsetLeft +'px,0,0)"
-  //   })
-  //   //右滑动
-  //   touth.on('move','swiperight',function(e){
-  //     this.style.transform ="translate(100 +'px,0,0')"
-  //   })
-  //},
   created(){
     if(!this.products.length > 0){
       this.$http(api.host + '/products')
@@ -147,6 +131,8 @@ export default {
       beautyArr:[],
       //母婴用品数据
       infantArr:[],
+      //置顶的开关
+      searchBarFixed:false,
     }
   },
   //监听路由变化
@@ -222,6 +208,34 @@ export default {
       }
       return arr
     },
+    //添加置顶的方法
+    handleScroll () {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      //获取要操作的元素，和元素距离窗口上方的距离
+      var move = this.$refs.move
+      var offsetTop = move.offsetTop
+      //和窗口滚动的距离进行比较
+      //因为置顶的时候offsetTop变成了96px
+      if (scrollTop > offsetTop && scrollTop > 436) {
+      this.searchBarFixed = true
+      } else {
+        this.searchBarFixed = false
+      }
+    },
+    // toThis(id){
+    //   var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    //   //获取分类图片的位置
+    //   var nurse = this.$refs.nurse
+    //   var face = this.$refs.face
+    //   var hairdressing = this.$refs.hairdressing
+    //   var baby = this.$refs.baby
+    //   console.log(nurse.offsetTop,face.offsetTop,hairdressing.offsetTop,baby.offsetTop)
+    //   switch (id){
+    //     case 3 :
+    //     return scrollTop = baby.offsetTop
+    //     break;
+    //   }
+    // }
   },
 }
 </script>
@@ -232,13 +246,18 @@ export default {
 .outer-box{
   width: 100%;
   .box-img{
-    margin-bottom: .4rem;
+    margin-bottom: .3rem;
   }
 }
+.nav-wrap::-webkit-scrollbar{
+  display: none;
+}
 .nav-wrap{
+  border-bottom: 2px solid @border-color;  
+  border-top: 2px solid @border-color;
+  position: absolute;
+  transition: all 0.8s;
   width: 100%;
-  border-top: 1px solid @border-color;
-  border-bottom: 1px solid @border-color;
   height: 1.2rem;
   line-height: 1.2rem;
   box-sizing: border-box;
@@ -247,6 +266,7 @@ export default {
   color:@color-minText;
   margin-bottom: .4rem;
   background-color: #fafafa;
+  overflow-x: scroll;
   .nav-box{
     touch-action: plan-x;
     width: 13.0667rem;
@@ -263,8 +283,15 @@ export default {
     }
   }
 }
+.nav-wrap.active{
+  position: fixed;
+  top:1.2rem;
+}
+.img-box1{
+  margin-top: 1.9rem!important;
+}
 .img-box{
-  margin-bottom: .4rem;
+  margin:0 0 .4rem 0;
   width: 100%;
   overflow: hidden;
   img{

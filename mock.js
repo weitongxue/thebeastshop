@@ -184,10 +184,6 @@ var data = Mock.mock({
           "id":3,
           "name":"餐厨"
         },
-        {
-          "id":4,
-          "name":"进入店铺"
-        },
       ]
     },
     {
@@ -210,10 +206,6 @@ var data = Mock.mock({
         {
           "id":4,
           "name":"限量礼盒"
-        },
-        {
-          "id":5,
-          "name":"进入店铺"
         },
       ]
     },
@@ -241,10 +233,6 @@ var data = Mock.mock({
         {
           "id":5,
           "name":"其他配饰"
-        },
-        {
-          "id":6,
-          "name":"进入店铺"
         },
       ]
     },
@@ -276,10 +264,6 @@ var data = Mock.mock({
         {
           "id":6,
           "name":"贵妇礼盒"
-        },
-        {
-          "id":7,
-          "name":"进入店铺"
         },
       ]
     },
@@ -351,7 +335,9 @@ var data = Mock.mock({
       //小图
       "img":"@image(292x304,@color)",
       //大图
-      "imgs":"@image(375x391,@color)",
+      "imgs|2-4":[
+        {"id|+1":10,"img":"@image(375x391,@color)"}
+      ],
       //上架时间
       "time|20-50":10,
       //推荐理由

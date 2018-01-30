@@ -19,7 +19,7 @@
       </nav>
       <!-- 商品 -->
       <div class="product-wrap">
-        <div class="product-item" v-for="(item,index) in sortProduct" :key="index">
+        <router-link tag="div" :to="'/detail/'+ item.id" class="product-item" v-for="(item,index) in sortProduct" :key="index">
           <div class="product-img">
             <img :src="item.img">
           </div>
@@ -27,7 +27,7 @@
           <div class="brand-name">{{item.names}}</div>
           <div class="brand-name">{{item.name}}</div>
           <div class="price">￥{{item.price}}</div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <template>
   <div class="detail">
-    <Header HeadTitle="品牌"/>
+    <Header HeadTitle="品牌" FavorBol = 'true'/>
     <div class="main-wrap">
       <!-- 详情页的轮播图 -->
       <div class="bannars">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="./images/demo.jpg"></div>
-              <div class="swiper-slide"><img src="./images/demo.jpg"></div>
-              <div class="swiper-slide"><img src="./images/demo.jpg"></div>
+              <div class="swiper-slide"  v-for="item in showProduct.imgs" :key="item.id">
+                <img :src="item.img">
+              </div>
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination"></div>
@@ -16,9 +16,9 @@
       </div>
       <!-- 商品详情 -->
       <div class="product-detail-wrap">
-        <div class="brand-name">THE BEAST</div>
-        <div class="name">永生植物装饰画</div>
-        <div class="price">￥288.00</div>
+        <div class="brand-name">{{showProduct.names}}</div>
+        <div class="name">{{showProduct.name}}</div>
+        <div class="price">￥{{showProduct.price}}</div>
       </div>
       <!-- 正品保证 -->
       <div class="product-badges">
@@ -41,7 +41,7 @@
           </div>
           <div class="product-content">
             <div class="p-text">
-              错落有致的淡水珍珠排列成优美的弧线，如强弱起伏的乐句，又如彗星划过夜空时留下的闪亮轨迹，经典的珍珠耳钉焕发出独特的节奏感与生命力，展现灵动之美。
+              {{showProduct.reason}}
             </div>
           </div>
         </div>
@@ -52,8 +52,8 @@
             <div class="p-reason">规格参数</div>
           </div>
           <div class="product-content">
-            <div class="p-text">材质：金</div>
-            <div class="p-text">产地：西班牙</div>
+            <div class="p-text">材质：{{showProduct.texture}}</div>
+            <div class="p-text">产地：{{showProduct.origin}}</div>
           </div>
         </div>
         <!-- 品牌故事 -->
@@ -64,8 +64,7 @@
           </div>
           <div class="product-content" style="padding-bottom:0.5333rem;">
             <div class="p-text">
-              Annaya 是一个集合设计师的品牌，集合了全球青年设计师的创意个性作品。Annaya不属于哪一个国家，它属于喜爱以及热爱饰品的年轻人。<br>
-              让每一个女孩都能在这里发现自己、找到自己，是Annaya的目标；趣味（FUN）、独特（UNIQUE）、年轻（YOUNG）是Annaya的态度；精良做工和高性价比，是Annaya对每个热爱时尚、追求美丽的女性的承诺。
+              {{showProduct.story}}
             </div>
           </div>
         </div>
@@ -96,16 +95,41 @@
 
 <script>
 import Header from '@/components/Head/Header'
+import api from '../../api'
 window.onload = function () {
   var mySwiper = new Swiper ('.swiper-container', {
     direction: 'horizontal',
     autoplayDisableOnInteraction:true,
     pagination : '.swiper-pagination',
     paginationType : 'bullets',
-    paginationHide :true
+    paginationHide :true,
   })
 }
 export default {
+  activated(){
+    let productInfo = []
+    if(!this.products.length > 0){
+      this.$http.get(api.host + '/products')
+      .then(res =>{
+        productInfo = res.data
+        let id = this.$route.params.id
+        for(let i = 0 ; i < productInfo.length ; i++){
+          if(id == productInfo[i].id){
+            this.showProduct = productInfo[i]
+          }
+        }
+      })
+    }else{
+      productInfo = this.products
+      let id = this.$route.params.id
+      for(let i = 0 ; i < productInfo.length ; i++){
+      if(id == productInfo[i].id){
+        this.showProduct = productInfo[i]
+      }
+    }
+  }
+   
+  },
   components: {
     Header
   },
@@ -115,6 +139,8 @@ export default {
       shoeDownBol: false,
       //展示退换货下面的内容
       shoeDownBol2: false,
+      //渲染的商品
+      showProduct:'',
     }
   },
   methods: {
@@ -123,6 +149,11 @@ export default {
     },
     showDown2 () {
       this.shoeDownBol2 = !this.shoeDownBol2
+    }
+  },
+  computed:{
+    products(){
+      return this.$store.state.products
     }
   }
 }
